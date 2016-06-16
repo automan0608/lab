@@ -4,3 +4,7 @@
 
 ##main-02.c
     same as main-01.c, except set phread stack size to 2MB
+
+##main-03-1.c
+##main-03-2.c
+    compare the usage of resource between 1-thread and 2-threads
