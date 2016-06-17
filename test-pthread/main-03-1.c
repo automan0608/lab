@@ -1,24 +1,36 @@
 
+#include <pthread.h>
 #include <stdio.h>
-#include <stdlib.h>
 
-static int sum;
-static int i;
-static int times ;
+int maxNum;
+int iter;
+int sum;
 
 int main(int argc, char *argv[])
 {
-    if(2 != argc)
-    {   printf("input error!\n");}
+    int result;
 
-    if(!strcmp(argv[1], "1")) { printf("at postion 1\n"); sleep(1000); }
+    if (3 != argc) { printf("usage: ./a.out <stop-posion> <iteration num>\n"); return -1;}
 
-    times = atoi(argv[2]);
+    maxNum = atoi(argv[2]);
+    iter = 0;
 
-    for (i = 0; i < times; i++)
+    if (!strcmp(argv[1],"1"))   {   printf("in 1 position\n");  sleep(100);     }
+
+    printf("will start calc\n");
+    while (1)
     {
-        sum += i;
+        iter++;
+        sum += iter;
+        if(maxNum < iter)
+        {
+            printf("sum of 1 - %d is %d\n", maxNum, sum);
+            break;
+            return 0;
+        }
     }
     
-    printf("calc sum 1 - %d complete, result:%d\n", times, sum);
+    if (!strcmp(argv[1],"2"))   {   printf("in 2 position\n");  sleep(100);     }
+    return 0;
+
 }

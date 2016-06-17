@@ -7,7 +7,11 @@
 
 ##main-03-1.c
 ##main-03-2.c
-    compare the usage of resource between 1-thread and 2-threads
+    compare the usage of resource between 1-thread and 2-threads do the same task "sum 1 - 1000..."
 
 ##main-04.c
     compare the usage of resource betweem "before dead lock" & "dead lock"
+
+#tools
+    valgrind --tool=callgrind ./main-03-2.out 0 1000000
+    kcachegrind callgrind.out.***
