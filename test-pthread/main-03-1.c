@@ -2,6 +2,10 @@
 #include <pthread.h>
 #include <stdio.h>
 
+// to be same with "use pthread"
+pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+pthread_t tid;
+
 int maxNum;
 int iter;
 int sum;
