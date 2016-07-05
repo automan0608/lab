@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <signal.h>
 
 #include <signal.h>
 #include <netinet/in.h>
@@ -13,6 +14,48 @@
 #define MAXLINE 1024
 #define IP "127.0.0.1"
 
+typedef void Sigfunc(int);
+
+Sigfunc *signal(int signo, Sigfunc *func)
+{
+    struct sigaction act, oact;
+    act.sa_handler = func;
+    sigemptyset(&act.sa_mask);
+//    sigfillset(&act.sa_mask);
+    act.sa_flags = 0;
+    if (signo == SIGALRM) 
+    {
+#ifdef SA_INTERRUPT
+        act.sa_flags |= SA_INTERRUPT;
+#endif
+    }
+    else
+    {
+#if 0
+        act.sa_flags |= SA_RESTART;
+        printf("set syscall restart success\n");
+#else 
+        printf("set syscall not restart success\n");
+#endif
+    }
+
+    if (sigaction(signo, &act, &oact) < 0 )
+        return (SIG_ERR);
+
+    printf("sigaction set success!\n");
+    return (oact.sa_handler);
+}
+
+
+void sigint_handler(int signo)
+{
+    printf("in sigint handler\n");
+#if 0
+    sleep(3);
+    printf("sigint sleep end\n");
+#endif
+}
+
 void func_echo(int connfd)
 {
 	ssize_t n;
@@ -21,13 +64,13 @@ void func_echo(int connfd)
 
 	while (1)
 	{
-//        buf = readline(NULL);
         read(fileno(stdin), buf, MAXLINE);
         write(connfd, buf, strlen(buf));
+        memset(buf,0,MAXLINE);
 again:
-        n = read(connfd, buf, MAXLINE);
+		n = read(connfd, buf, MAXLINE);
         printf("read() return:%d\n", (int)n);
-        if (0 < n)
+		if (0 < n)
 		{
             buf[n] = '\0';
             write(fileno(stdout), buf, strlen(buf));
@@ -41,7 +84,12 @@ again:
 		else
 		{
 			if (errno == EINTR)
-				goto again;
+            {
+			    printf("read EINTR\n");
+                /* not restart by user code, to see if the read() will restart */
+//				goto again;
+            }
+
 			printf("read error\n");
 			exit(-1);
 		}
@@ -53,6 +101,8 @@ int main()
     struct sockaddr_in servaddr;
     int result=0 , sockfd=0;
     unsigned char buf[sizeof(struct in_addr)];
+
+    signal(SIGINT, sigint_handler);
 
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (0 >= sockfd)
