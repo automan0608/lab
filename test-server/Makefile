@@ -1,10 +1,12 @@
 
-CFLAGS :=
-LDFLAGS :=
+CFLAGS := 
+LDFLAGS := -lpthread
 
-objs = main-01-echo-serv.o main-01-echo-cli.o
+objs = main-01-echo-serv.o main-01-echo-cli.o \
+		main-02-echo-serv.o main-02-echo-cli.o
 
-target = main-01-echo-serv.out main-01-echo-cli.out
+target =  main-01-echo-serv.out main-01-echo-cli.out \
+		main-02-echo-serv.out main-02-echo-cli.out
 
 all:
 	$(MAKE) $(target)
