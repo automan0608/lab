@@ -1,4 +1,3 @@
-
 ## main-01.c
     test sigmask & syscall "sleep" & "select" restart when use signal
     "sleep" & "select" not restart
