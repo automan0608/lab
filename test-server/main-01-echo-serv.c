@@ -29,7 +29,7 @@ void sigchld_handler(int signo)
 
 void func_echo(int connfd)
 {
-	size_t n;
+	ssize_t n;
 	char buf[MAXLINE];
 
 	while (1)
