@@ -1,3 +1,7 @@
+
+#CC := gcc
+CC := /home/zhaosheng/sdk-toolchain/toolchain-sohointl-vr600v2/usr/bin/mips-unknown-linux-uclibc-gcc
+
 CFLAGS += -I./dir1/ -I./dir2/
 LDFLAGS += -L./dir1/ -L./dir2/ 
 
@@ -5,7 +9,7 @@ LDFLAGS += -L./dir1/ -L./dir2/
 LDFLAGS +=  -ltest -lfun1
 
 all:
-	gcc main.c $(CFLAGS) $(LDFLAGS)
+	$(CC) main.c $(CFLAGS) $(LDFLAGS)
 
 clean:
 	rm a.out
