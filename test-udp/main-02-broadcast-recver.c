@@ -15,6 +15,7 @@ int main()
 {
     struct sockaddr_in servaddr;
     int result=0 , listenfd=0;
+    const int on = 1;
 
     listenfd = socket(AF_INET, SOCK_DGRAM, 0);
     if (0 >= listenfd)
@@ -27,6 +28,8 @@ int main()
     servaddr.sin_family = AF_INET;
     servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
     servaddr.sin_port = htons(PORT);
+
+    setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
 
     result = bind(listenfd, (struct sockaddr*)&servaddr, sizeof(servaddr));
     if (0 > result)
@@ -47,7 +50,7 @@ int main()
 	memset(buff, 0, MAXLINE);
 	int n = recvfrom(listenfd, buff, MAXLINE, 0, (struct sockaddr *)&cliaddr, &clilen);
 
-	printf("recv buf is : %s\n", buff);
+	printf("pid:%d, recv buf is : %s\n", getpid(), buff);
 
     }
 }

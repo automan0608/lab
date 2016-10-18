@@ -11,7 +11,8 @@
 
 #define PORT 6000
 #define MAXLINE 1024
-#define IP "127.0.0.1"
+//#define IP "127.0.0.1"
+#define IP "192.168.0.1"
 
 
 int main()

@@ -11,8 +11,10 @@
 
 #define PORT 6000
 #define MAXLINE 1024
-#define IP "127.0.0.1"
+//#define IP "192.168.0.11"
 
+//char *ip = "192.168.0.11";
+char *ip = "172.31.1.164";
 
 int main()
 {
@@ -27,7 +29,14 @@ int main()
         return -1;
     }
 
-    result = inet_pton(AF_INET, IP, &servaddr.sin_addr.s_addr);
+    result = inet_pton(AF_INET, ip, &servaddr.sin_addr.s_addr);
+
+    printf("set servaddr 0x%02x%02x%02x%02x\n", 
+		    ((unsigned char *)&servaddr.sin_addr.s_addr)[0],
+		    ((unsigned char *)&servaddr.sin_addr.s_addr)[1],
+		    ((unsigned char *)&servaddr.sin_addr.s_addr)[2],
+		    ((unsigned char *)&servaddr.sin_addr.s_addr)[3]
+		    );
 
     bzero(&servaddr, sizeof(servaddr));
     servaddr.sin_family = AF_INET;
