@@ -6,12 +6,16 @@ LDFLAGS +=
 objs := main-01.o 			\
 	main-02-dofile.o 		\
 	main-03-load-cfg-simple.o	\
-	main-04-load-cfg-table.o
+	main-04-load-cfg-table.o	\
+	main-05-load-cfg-colorname.o	\
+	main-06-call-func.o
 
-targets := main-01.out			\
-	   main-02-dofile.out		\
-	   main-03-load-cfg-simple.out	\
-	   main-04-load-cfg-table.out
+targets := main-01.out				\
+	   main-02-dofile.out			\
+	   main-03-load-cfg-simple.out		\
+	   main-04-load-cfg-table.out		\
+	   main-05-load-cfg-colorname.out 	\
+	   main-06-call-func.out
 
 all:$(targets)
 

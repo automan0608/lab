@@ -10,3 +10,9 @@
 
 ##main-04.c
 >    test of lua load table config
+
+##main-05.c
+>    test of lua load colorname config
+
+##main-06.c
+>    test of lua call function
