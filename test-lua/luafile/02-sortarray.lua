@@ -5,10 +5,11 @@ local i = 1
 
 math.randomseed(os.time(NULL))
 
+print('before sort')
 for i=1, 4, 1
 do
 	a[i] = math.random(1, 100)
-	print(a[i])
+	print(i .. ': ' .. a[i])
 end
 
 print('after sort')

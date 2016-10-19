@@ -6,7 +6,7 @@
 #include <lua5.2/lua.h>
 #include <lua5.2/lauxlib.h>
 
-#define DEFAULTFILE  "/home/zhaosheng/git/my-lab.git/test-lua/luafile/01-sortarray.lua"
+#define DEFAULTFILE  "/home/zhaosheng/git/my-lab.git/test-lua/luafile/02-sortarray.lua"
 
 int main(int argc, void *argv[])
 {
