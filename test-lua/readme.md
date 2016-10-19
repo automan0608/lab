@@ -18,4 +18,4 @@
 >    test of lua call function
 
 ##main-07.c
->    test of c upvalue
+>    test of c upvalue, segmentation fault
