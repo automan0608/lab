@@ -16,3 +16,6 @@
 
 ##main-06.c
 >    test of lua call function
+
+##main-07.c
+>    test of c upvalue
