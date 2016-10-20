@@ -6,49 +6,47 @@
 #include <lua5.2/lua.h>
 #include <lua5.2/lauxlib.h>
 
-static int counter(lua_State *L)
+static int l_counter(lua_State *L)
 {
-	printf("111\n");
-	double val = lua_tonumber(L, lua_upvalueindex(1));
+	printf("%s | 1111\n", __FUNCTION__);
+//	double val = lua_tonumber(L, lua_upvalueindex(1));
+	double val = luaL_checknumber(L, lua_upvalueindex(1));
 
-	printf("222\n");
+	printf("%s | 2222\n", __FUNCTION__);
 	lua_pushnumber(L, ++val);
-	printf("333\n");
+	printf("%s | 3333\n", __FUNCTION__);
 	lua_pushvalue(L, -1);
-	printf("444\n");
+	printf("%s | 4444\n", __FUNCTION__);
 
 	lua_replace(L, lua_upvalueindex(1));
 
-	printf("555\n");
+	printf("%s | 5555\n", __FUNCTION__);
 	printf("%s | val = %lf\n", __FUNCTION__, val);
 
 	return 1;
 }
 
-int newCount(lua_State *L)
+static int l_newCounter(lua_State *L)
 {
+	printf("%s | 1111\n", __FUNCTION__);
 	lua_pushnumber(L, 0);
-	lua_pushcclosure(L, &counter, 1);
+	printf("%s | 2222\n", __FUNCTION__);
+	lua_pushcclosure(L, &l_counter, 1);
+	printf("%s | 3333\n", __FUNCTION__);
 
 	return 1;
 }
 
-int main()
+static const struct luaL_Reg counter_lib[] = 
 {
-	lua_State *L = luaL_newstate();
-	
-	int result = newCount(L);
+	{"new", l_newCounter},
+	{"get", l_counter},
+	{NULL, NULL},
+};
 
-	printf("%s | ", __FUNCTION__);
-	counter(L);
-
-	printf("%s | ", __FUNCTION__);
-	counter(L);
-
-	printf("%s | ", __FUNCTION__);
-	counter(L);
-
-	printf("%s | ", __FUNCTION__);
-	counter(L);
-
+int luaopen_counter_lib(lua_State *L)
+{
+	luaL_openlib(L, "counter", counter_lib, 0);
+	return 1;
 }
+

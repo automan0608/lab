@@ -19,3 +19,6 @@
 
 ##main-07.c
 >    test of c upvalue, segmentation fault
+
+##main-08.c
+>    test of c userdata
