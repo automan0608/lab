@@ -1,5 +1,7 @@
 
 CC 	:= gcc
+CFLAGS 	+= -L$(PWD)/lua5.2-5.2.3/src/.libs
+#CFLAGS 	+= -L/home/zhaosheng/open-source/lua5.2-5.2.3/src/.libs
 CFLAGS 	+= -llua5.2
 LDFLAGS +=  -g
 
