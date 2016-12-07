@@ -1,6 +1,6 @@
 
 CFLAGS  :=
-LDFLAGS :=
+LDFLAGS := -levent
 
 src  := $(shell find -name *.c)
 objs  := $(patsubst %.c, %.o, $(src))
@@ -8,8 +8,6 @@ objs  := $(patsubst %.c, %.o, $(src))
 target  := get_mjpeg.out
 
 all:$(target)
-	@echo $(src)
-	@echo $(objs)
 	make $(target)
 
 $(target):$(objs)
