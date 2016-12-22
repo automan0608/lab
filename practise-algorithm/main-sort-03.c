@@ -5,6 +5,7 @@
 
 static void printNums(int *sortnum, int num);
 static void mysort(int *sortnum, int num);
+static void mysortWithInterval(int *sortnum, int interval, int num);
 
 int main(int argc, char const *argv[])
 {
@@ -51,28 +52,17 @@ static void printNums(int *sortnum, int num)
     }
 }
 
-// insert sort
+// *** sort
 static void mysort(int *sortnum, int num)
 {
-    printf("in mysort, sortnum:%p, num:%d\n", sortnum, num);
+    printf("in mysort\n");
 
-    int i = 0, j = 0;
+    int interval;
 
-    for (i = 0; i < num; ++i)
-    {
-        for (j = 0; j < num - i -1; ++j)
-        {
-            if (sortnum[j] > sortnum[j + 1])
-            {
-                int tmp = sortnum[j];
-                sortnum[j] = sortnum[j + 1];
-                sortnum[j + 1] = tmp;
-            }
-        }
-    }
-    printNums(sortnum, num);
-    printf("out mysort\n");
 }
 
-
+static void mysortWithInterval(int *sortnum, int interval, int num)
+{
+    printf("in mysortWithInterval, interval:%d, num:%d\n", interval, num);
+}
 

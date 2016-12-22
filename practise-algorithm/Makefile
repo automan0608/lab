@@ -2,17 +2,18 @@
 CFLAGS  :=
 LDFLAGS :=
 
-src  := $(shell find -name *.c)
+src  := $(shell find -name "*c")
 objs  := $(patsubst %.c, %.o, $(src))
 
 target  := $(patsubst %.c, %.out, $(src))
 
 all:
-#	echo $(target)
+#	echo $(src)
+	echo $(target)
 #	echo $(objs)
 	make $(target)
 
-$(target):$(objs)
+$(target):%.out:%.o
 	$(CC) -o $@ $< $(CFLAGS) $(LDFLAGS)
 
 $(objs):%.o:%.c

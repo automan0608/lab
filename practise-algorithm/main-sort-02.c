@@ -51,17 +51,37 @@ static void printNums(int *sortnum, int num)
     }
 }
 
-// *** sort
+// insert sort
 static void mysort(int *sortnum, int num)
 {
-    printf("in mysort\n");
+    printf("in mysort, sortnum:%p, num:%d\n", sortnum, num);
 
-    int interval;
+    int i = 0, j = 0;
 
+    int index = 0;
+
+    for (i = 0; i < num - 1; ++i)
+    {
+        index = i;
+
+        for (j = i + 1; j < num; ++j)
+        {
+            if (sortnum[j] < sortnum[index])
+            {
+                index = j;
+            }
+        }
+
+        if (sortnum[index] < sortnum[i])
+        {
+            int tmp = sortnum[index];
+            sortnum[index] = sortnum[i];
+            sortnum[i] = tmp;
+        }
+    }
+    printNums(sortnum, num);
+    printf("out mysort\n");
 }
 
-static void mysortWithInterval(int *sortnum, int interval, int num)
-{
-    printf("in mysortWithInterval, interval:%d, num:%d\n", interval, num);
-}
+
 
