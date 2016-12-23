@@ -73,6 +73,3 @@ static void mysort(int *sortnum, int num)
     printNums(sortnum, num);
     printf("out mysort\n");
 }
-
-
-
