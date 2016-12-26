@@ -52,17 +52,54 @@ static void printNums(int *sortnum, int num)
     }
 }
 
+static int partition(int sortnum[], int num, int start, int end)
+{
+    int val = sortnum[start];
+
+    while (start < end)
+    {
+        printf("."); fflush(stdout);
+        while (sortnum[start] < val)
+            start++;
+        while (sortnum[end] > val)
+            end--;
+
+        int tmp = sortnum[start];
+        sortnum[start] = sortnum[end];
+        sortnum[end] = tmp;
+    }
+
+    printNums(sortnum, num);
+    return start;
+}
+
+static int fastsort(int sortnum[], int num, int start, int end)
+{
+    printf("in fastsort, start:%d, end:%d\n", start, end);
+
+    int pos = partition(sortnum, num, start, end);
+
+    printf("pos:%d\n", pos);
+
+    if (pos > start)
+        fastsort(sortnum, num, start, pos - 1);
+
+    if (pos < end)
+        fastsort(sortnum, num, pos + 1, end);
+}
+
 // *** sort
 static void mysort(int *sortnum, int num)
 {
     printf("in mysort\n");
 
-    int interval;
+    if (NULL == sortnum)
+    {
+        printf("parameter error\n");
+        exit(-1);
+    }
 
-}
+    fastsort(sortnum, num, 0, num - 1);
 
-static void mysortWithInterval(int *sortnum, int interval, int num)
-{
-    printf("in mysortWithInterval, interval:%d, num:%d\n", interval, num);
 }
 
